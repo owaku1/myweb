@@ -1,7 +1,5 @@
 <?php
-/**
- * Hlavička šablony
- */
+/** Header s logem, menu a funkčním hamburgerem pro mobily */
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -11,34 +9,47 @@
 </head>
 <body <?php body_class(); ?>>
 
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="container header-inner">
+    <!-- Logo -->
     <a class="logo" href="<?php echo esc_url(home_url('/')); ?>">
       <?php
-      // Pokud je nastaveno logo přes „Vzhled > Přizpůsobit > Identita webu“
-      if (function_exists('the_custom_logo') && has_custom_logo()) {
-          the_custom_logo();
+      if (has_custom_logo()) {
+        the_custom_logo();
       } else {
-          bloginfo('name');
+        echo '<span class="site-title">'.esc_html(get_bloginfo('name')).'</span>';
       }
       ?>
     </a>
 
-    <nav class="main-nav">
+    <!-- Hamburger (viditelný jen na mobilu) -->
+    <button class="nav-toggle" id="navToggle" aria-label="Otevřít menu" aria-controls="primary-nav" aria-expanded="false">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <!-- Menu -->
+    <nav class="main-nav" id="primary-nav" role="navigation" aria-label="Hlavní menu">
       <?php
-      wp_nav_menu([
+      $menu_html = wp_nav_menu([
         'theme_location' => 'primary',
         'container'      => false,
         'menu_class'     => 'menu',
-        'fallback_cb'    => function () {
-            echo '<ul class="menu">
-                    <li><a href="#o-nas">O nás</a></li>
-                    <li><a href="#sluzby">Služby</a></li>
-                    <li><a href="#galerie">Galerie</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
-                  </ul>';
-        }
+        'fallback_cb'    => false,
+        'echo'           => false,
       ]);
+
+      if (empty($menu_html) || trim(strip_tags($menu_html)) === '') {
+        echo '<ul class="menu">
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+              </ul>';
+      } else {
+        echo $menu_html;
+      }
       ?>
     </nav>
   </div>

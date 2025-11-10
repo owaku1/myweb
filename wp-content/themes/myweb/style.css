@@ -1,12 +1,11 @@
 /*
-Theme Name: myweb
-Theme URI: https://example.com
-Author: ChatGPT
-Author URI: https://example.com
-Description: OnePage WordPress šablona. Všechen obsah je spravovatelný v CMS (sekce jako CPT, iframe přes Customizer/shortcode, menu, sociální sítě).
-Version: 1.0.0
-License: GPL-2.0-or-later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: vlastni-sablona
-Tags: one-page, responsive, education
+Theme Name: Moje OnePage (final)
+Author: Tvoje jméno
+Description: Finální funkční OnePage šablona s funkčním menu, smooth-scroll a CMS podporou.
+Version: 1.0
+Text Domain: moje-onepage
 */
+
+@import url("style/main.css");
+
+body { background:#0f172a; color:#e2e8f0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif; margin:0; }
